@@ -19,26 +19,46 @@ describe('Unit test for User entity', () => {
     expect(sut.props.createdAt).toBeInstanceOf(Date)
   })
 
-  it('UserEntity - get name', () => {
+  it('Getter name', () => {
     expect(sut.name).toBeDefined()
     expect(sut.name).toEqual(props.name)
     expect(typeof sut.name).toBe('string')
   })
 
-  it('UserEntity - get email', () => {
+  it('Setter name', () => {
+    sut['name'] = 'other name'
+    expect(sut.name).toEqual('other name')
+  })
+
+  it('Getter email', () => {
     expect(sut.email).toBeDefined()
     expect(sut.email).toEqual(props.email)
     expect(typeof sut.email).toBe('string')
   })
 
-  it('UserEntity - get password', () => {
+  it('Getter password', () => {
     expect(sut.password).toBeDefined()
     expect(sut.password).toEqual(props.password)
     expect(typeof sut.password).toBe('string')
   })
 
-  it('UserEntity - get createdAt', () => {
+  it('Setter password', () => {
+    sut['password'] = '123456789'
+    expect(sut.password).toEqual('123456789')
+  })
+
+  it('Getter createdAt', () => {
     expect(sut.createdAt).toBeDefined()
     expect(sut.createdAt).toBeInstanceOf(Date)
+  })
+
+  it('Update  name  method', () => {
+    sut.updateName('other name 2')
+    expect(sut.name).toEqual('other name 2')
+  })
+
+  it('Update  password  method', () => {
+    sut.updateName('985236417')
+    expect(sut.name).toEqual('985236417')
   })
 })
