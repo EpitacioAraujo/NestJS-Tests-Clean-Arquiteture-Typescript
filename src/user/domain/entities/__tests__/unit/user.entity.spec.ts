@@ -8,6 +8,7 @@ describe('Unit test for User entity', () => {
   beforeEach(() => {
     props = UserDataBuilder({})
 
+    // Note: SUT -> System under Test, uma convenção estabelecida pela ISQTB onde nomeamos a entidade a set testada como "sut"
     sut = new UserEntity(props)
   })
 
