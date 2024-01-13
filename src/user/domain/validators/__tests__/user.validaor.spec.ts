@@ -111,8 +111,6 @@ describe('User validator - unit test', () => {
       props.password = null as any
       isValid = sut.validate(props)
 
-      console.log(sut.errors.password)
-
       expect(isValid).toBeFalsy()
       expect(sut.errors.password).toStrictEqual([
         'password should not be empty',
@@ -141,12 +139,36 @@ describe('User validator - unit test', () => {
     })
 
     it('Max 255 length rule', () => {
-      props.email = 'a'.repeat(256) as any
+      props.password = 'a'.repeat(256) as any
       isValid = sut.validate(props)
       expect(isValid).toBeFalsy()
-      expect(sut.errors.email).toStrictEqual([
-        'email must be an email',
-        'email must be shorter than or equal to 255 characters',
+      expect(sut.errors.password).toStrictEqual([
+        'password must be shorter than or equal to 100 characters',
+      ])
+    })
+  })
+
+  describe('createdAt field - Invalidation cases', () => {
+    const props = UserDataBuilder({})
+    let isValid
+
+    it('Is not a date instance', () => {
+      props.createdAt = 10 as any
+      isValid = sut.validate(props)
+
+      expect(isValid).toBeFalsy()
+      expect(sut.errors.createdAt).toStrictEqual([
+        'createdAt must be a Date instance',
+      ])
+    })
+
+    it('Is not a valid date', () => {
+      props.createdAt = '2000-13-32' as any
+      isValid = sut.validate(props)
+
+      expect(isValid).toBeFalsy()
+      expect(sut.errors.createdAt).toStrictEqual([
+        'createdAt must be a Date instance',
       ])
     })
   })
