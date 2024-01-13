@@ -9,6 +9,10 @@ class ClassValidatorFields<PropsValidate>
 
   validate(data: any): boolean {
     const errors = validateSync(data)
+
+    this.errors = null
+    this.validatedData = null
+
     if (errors.length) {
       this.errors = {}
       for (const error of errors) {
