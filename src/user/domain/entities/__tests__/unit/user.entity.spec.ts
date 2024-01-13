@@ -6,6 +6,7 @@ describe('User entity - unit test', () => {
   let sut: UserEntity
 
   beforeEach(() => {
+    UserEntity.validate = jest.fn()
     props = UserDataBuilder({})
 
     // Note: SUT -> System under Test, uma convenção estabelecida pela ISQTB onde nomeamos a entidade a set testada como "sut"
@@ -13,6 +14,7 @@ describe('User entity - unit test', () => {
   })
 
   it('Constructor method', () => {
+    expect(UserEntity.validate).toHaveBeenCalled()
     expect(sut.props.name).toEqual(props.name)
     expect(sut.props.email).toEqual(props.email)
     expect(sut.props.password).toEqual(props.password)
@@ -53,11 +55,13 @@ describe('User entity - unit test', () => {
   })
 
   it('Update  name  method', () => {
+    expect(UserEntity.validate).toHaveBeenCalled()
     sut.updateName('other name 2')
     expect(sut.name).toEqual('other name 2')
   })
 
   it('Update  password  method', () => {
+    expect(UserEntity.validate).toHaveBeenCalled()
     sut.updateName('985236417')
     expect(sut.name).toEqual('985236417')
   })
